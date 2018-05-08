@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #left{
+            width: 400px;
+            height: 400px;
+            margin: 100px 0 0 100px;
+            background: url(./img/lj400.jpg) no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+            
+        }
+        #box{
+            width: 220px;
+            height: 200px;
+            background: #fff;
+            opacity: 0.6;
+            filter: alpha(opacity=60);
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        #cover{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+        #right{
+            width: 440px;
+            height: 400px;
+            position: absolute;
+            left: 510px;
+            top: 100px;
+            overflow: hidden;
+            display: none;
+        }
+        #pic{
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="left">
+        <div id="box"></div>
+        <div id="cover"></div>
+    </div>
+    <div id="right">
+        <img src="./img/lj400.jpg" alt="" id="pic">
+    </div>
+    <script>    
+        var left = document.getElementById('left'),
+            box = document.getElementById('box'),
+            cover = document.getElementById('cover'),
+            right= document.getElementById('right'),
+            pic = document.getElementById('pic');
+
+        left.onmouseover = function (){
+            box.style.display = 'block';
+            right.style.display= 'block';
+        }
+        left.onmouseout = function (){
+            box.style.display = 'none';
+            right.style.display = 'none';
+        }
+       
+        //如果把mousemove事件加在父级left上，那么鼠标移动到box里面的时候，获取到的offsetX和offsetY就成了相对于box的位置了。
+        //所以在left里加一个跟left一样大的，完全透明，层级最高的盒子，把鼠标移动事件加在这个cover盒子上   
+        cover.onmousemove = function (e){
+            // console.log(e.offsetX + " " + e.offsetY);
+            var ev = e || window.event;
+            var l = e.offsetX || e.layerX;
+            var t = e.offsetY || e.layerY;
+                var box_left = l - box.offsetWidth / 2;
+                var box_top = t - box.offsetHeight / 2;
+                if(box_left < 0){
+                    box_left = 0;
+                }
+                if(box_left > left.offsetWidth - box.offsetWidth){
+                    box_left = left.offsetWidth - box.offsetWidth;
+                }
+                if(box_top < 0){
+                    box_top = 0;
+                }
+                if(box_top > left.offsetHeight - box.offsetHeight){
+                    box_top = left.offsetHeight - box.offsetHeight;
+                }
+                box.style.left = box_left + 'px';
+                box.style.top = box_top + 'px';
+
+                pic.style.left = box_left * -2 + 'px';
+                pic.style.top = box_top * -2 + 'px';
+        }
+        
+    </script>
+</body>
+</html>

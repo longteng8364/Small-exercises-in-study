@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0;}
+			#div1 {
+				width:1600px;
+				height:320px;
+				background:#CCCCCC;
+				margin:100px auto;
+				position:relative;
+				overflow:hidden;
+			}
+			#div1 ul {
+				position:absolute;
+				left:0;
+				top:0;
+			}
+			#div1 ul li{
+				width:320px;
+				height:320px;
+				float:left;
+				list-style:none;
+			}
+		</style>
+		<script>
+//			window.onload=function ()
+//			{
+//				var oDiv=document.getElementById('div1');
+//				var oUl=document.getElementById('ul1');
+//				var aLi=document.getElementsByTagName('li');
+//				var aBtn=document.getElementsByTagName('input');
+//				
+//				oUl.innerHTML+=oUl.innerHTML;
+//				oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+//				
+//				var toLeft=function ()
+//				{
+//					//(写错了)oUl.style.left=oUl.style.offsetleft-2+'px';
+//					oUl.style.left=oUl.offsetLeft-5+'px';
+//					//这个if判断要放在定时器里
+//					if(oUl.offsetLeft<-oUl.offsetWidth/2)
+//					{
+//					oUl.style.left=0;
+//					}
+//				}
+//				var toRight=function ()
+//				{
+//					oUl.style.left=oUl.offsetLeft+5+'px';
+//					/*向右走时情况不同，参照物是左顶点,当ul走到头,
+//					也就是ul的左边和左顶点重合的时候,就要将ul向左拉回
+//					半个*/
+//					if(oUl.offsetLeft>0)
+//					{
+//						oUl.style.left=-oUl.offsetWidth/2+'px';
+//					}
+////					if(oUl.offsetLeft>oUl.offsetWidth/2)
+////					{
+////						oUl.style.left=0;
+////					}
+//				}
+//				setInterval(toLeft,30);
+//				
+//				aBtn[0].onlick=function()
+//				{
+//					clearInterval(toRight,30);
+//					setInterval(toLeft,30);
+//				}
+//				aBtn[1].onclick=function()
+//				{
+//					clearInterval(toLeft,30);
+//					setInterval(toRight,30);
+//				}
+//
+//			}
+			window.onload=function ()
+			{
+				var oDiv=document.getElementById('div1');
+				var oUl=document.getElementById('ul1');
+				var aLi=document.getElementsByTagName('li');
+				var aBtn=document.getElementsByTagName('input');
+				var speed=-5;
+				oUl.innerHTML+=oUl.innerHTML;
+				oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+				
+				function move(){
+					oUl.style.left=oUl.offsetLeft+speed+'px';
+					if(oUl.offsetLeft<-oUl.offsetWidth/2)
+					{
+						oUl.style.left='0';
+					}
+					if(oUl.offsetLeft>0)
+					{
+						oUl.style.left=-oUl.offsetWidth/2+'px';
+					}
+				}
+				var timer=setInterval(move,30);
+				
+				aBtn[0].onclick=function ()
+				{
+					speed=-5;
+				}
+				aBtn[1].onclick=function ()
+				{
+					speed=5;
+				}
+				
+				oDiv.onmouseover=function ()
+				{
+					clearInterval(timer);
+				}
+				oDiv.onmouseout=function ()
+				{
+					//这里一开始我没加timer=  就不能实现鼠标移出停止的功能，而且每次进入移出之后
+					//运动速度会加快。
+					timer=setInterval(move,30);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" value="向左" />
+		<input type="button" value="向右" />
+		<div id="div1">
+			<ul id="ul1">
+				<li><img src="img/1.png" /></li>
+				<li><img src="img/2.png" /></li>
+				<li><img src="img/3.png" /></li>
+				<li><img src="img/4.png" /></li>
+				<li><img src="img/5.png" /></li>
+			</ul>
+		</div>
+	</body>
+</html>

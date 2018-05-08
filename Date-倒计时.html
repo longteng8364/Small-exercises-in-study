@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="div1"></div>
+		<script>
+			//把时间格式的字符串转换成标准的时间格式
+			//var tar=new Date("2015-8-30 09:22:21");
+			//中间用"-"在IE6~8下不兼容,需要改成"/";
+			
+			//getTime():获取1970年1月1日至今的毫秒数
+			window.onload=function()
+			{
+				var oDiv=document.getElementById('div1');
+				function zero(time)
+				{
+					return time > 9 ? time : '0' + time;
+				}
+				
+				function getRTime()
+				{
+					var nowTime=new Date();
+					var endTime=new Date('2018/08/30 11:30:00');
+					var t=endTime.getTime()-nowTime.getTime();
+					if(t>0){
+						var d=Math.floor(t/(1000*60*60*24));
+						var h=Math.floor(t/(1000*60*60)%24);
+						var m=Math.floor(t/(1000*60)%60);
+						var s=Math.floor(t/1000%60);
+						
+						oDiv.innerHTML=d+'天'+zero(h)+'时'+zero(m)+'分'+zero(s)+'秒';
+					}else if(Math.floor(t/1000)==0){
+						clearInterval(timer);
+					}
+				}
+				var timer=setInterval(getRTime,1000);//函数getRTime后面不用带()
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>svg进度条</title>
+  <style>
+  input {
+    width: 500px;
+  }
+  path {
+    stroke-width: 20;
+    stroke-linecap: round;
+    fill: transparent; 
+  }
+  #path1 {
+    stroke: #ccc;
+    
+  }
+  #path2 {
+    stroke: orange;
+    stroke-dasharray: 1000px;
+    stroke-dashoffset: 1000px;
+    transition: all 1s ease;
+    /* 这里需要好好理解一下，我们的目的是要path2一开始是看不到的，所以要给他设置dasharray是路径总长度，dashoffset也是这个值。但是目前路径的长度不知道，所以就给它设置一个肯定大于路径的值 */
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <input type="range" name="range" id="range" min="0" max="100" step="1" value="0">
+  </div>
+
+  <svg width="500" height="500">
+    <path d="M 200 300 A 100 100 0 1 1 300 300" id="path1"></path>
+    <path d="M 200 300 A 100 100 0 1 1 300 300" id="path2"></path>
+    <text id="text1" x="240" y="220">0%</text>  
+  </svg>
+
+  <script>
+    var len = path2.getTotalLength();
+    range.onchange = function (){
+      var value = this.value;
+      path2.style.strokeDashoffset = 1000 - len * value / 100 + 'px';
+
+      text1.innerHTML = value + '%';
+    }
+  
+  </script>
+</body>
+</html>

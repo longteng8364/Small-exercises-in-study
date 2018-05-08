@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            /* 定义变量 
+              几个变量都根据一个变量计算得来，这样在改变的时候，只要改变那个基础变量就可以了
+            */
+            --columns: 4;
+            --margins: calc(24px / var(--columns));
+            --space: calc(4px * var(--columns));
+            --fontSize: calc(20px - 4 / var(--columns));
+        }
+        .box {
+            width: 50%;
+            min-width: 320px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .cell {
+            width: calc((100% - var(--margins) * var(--columns) * 2) / var(--columns));
+            margin: var(--margins);
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+            background-color: #f0f3f9;
+            float: left;
+        }
+        .cell-header {
+            background: currentColor;
+            /* currentColor表示当前标签所继承的文字颜色 */
+        }
+        .cell-title {
+            padding: var(--space);
+            font-size: var(--fontSize);
+            color: #fff;
+        }
+        .cell-content {
+            height: 150px;
+            padding: var(--space);
+            font-size: var(--fontSize);
+        }
+        @media screen and (max-width: 1200px) {
+            .box {
+                --columns: 3;
+            }
+        }
+        @media screen and (max-width: 900px) {
+            .box {
+                --columns: 2;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .box {
+                --columns: 1;
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+        <div class="box">
+            <div class="cell" style="color: #F44336;">
+                <header class="cell-header">
+                    <div class="cell-title">红色</div>
+                </header>
+                <main class="cell-content">改变浏览器的宽度</main>
+            </div>
+
+            <div class="cell" style="color: #E91E63;">
+                <header class="cell-header">
+                    <div class="cell-title">粉色</div>
+                </header>
+                <main class="cell-content">会看到布局发生了变化</main>
+            </div>
+
+            <div class="cell" style="color: #9C27B0;">
+                <header class="cell-header">
+                    <div class="cell-title">紫色</div>
+                </header>
+                <main class="cell-content">仅仅是通过CSS改变一个变量值实现</main>
+            </div>
+
+            <div class="cell" style="color: #00BCD4;">
+                <header class="cell-header">
+                    <div class="cell-title">青色</div>
+                </header>
+                <main class="cell-content">这比传统的响应式处理要更省代码更好维护</main>
+            </div>
+
+            <div class="cell" style="color: #009688;">
+                <header class="cell-header">
+                    <div class="cell-title">茶色</div>
+                </header>
+                <main class="cell-content">本例子主要为了演示响应式与变化效果</main>
+            </div>
+
+            <div class="cell" style="color: #4CAF50;">
+                <header class="cell-header">
+                    <div class="cell-title">绿色</div>
+                </header>
+                <main class="cell-content">所以，至于布局变化细节是否合理就不用在意了。</main>
+            </div>
+        </div>
+
+        <script>
+            document.querySelector('.btn').onmousemove = (e) => {
+                const x = e.pageX - e.target.offsetLeft;
+                const y = e.pageY - e.target.offsetTop;
+
+                e.target.style.setProperty('--x', `${ x }px`);
+                e.target.style.setProperty('--y', `${ y }`);
+            }
+        </script>
+    <!--
+         CSS变量的语法和用法
+         1.css中原生的变量定义语法是--*  ,变量的使用语法是var(--*)。css变量命名可以是数字，字母，横线和下划线，不能包含 $ [] ^ () % 等，但是可以是数字开头，甚至只是一个数字 还可以是中文日文韩文等。比如 --1：red；
+         2.变量的声明和使用都必须在一个{}里面，并且声明变量的代码块必须是使用该变量的代码块的同级或祖先级，如果要声明全局变量，可以声明在:root{}里面
+         3.css属性名不能用变量，而且css变量也不能同时声明多个。
+         css变量在使用的时候，可以设定一个默认值，这样假如这个变量没有声明，就会使用默认值 例如：background-color:var(--color, #fff);
+         4.如果定义变量的时候设置了不合法的值，比如
+            body{
+                --color: 20px;
+                background-color: var(--color, red);
+            }
+            颜色显然不能是20px，所以这里会使用缺省颜色transparent，而不是后面设置的默认值red；
+         5.css变量定义的时候，其值后面会自己加个空格比如：
+            body{
+                --size: 20;
+                font-size: var(--size)px;
+            }
+            这样使用的话，最后的结果是 font-size：20 px，会有个空格，而这个值是不合法的。
+            所以定义变量的时候，最好的做法是有单位的加个单位，不要整这拼接的玩法。
+            不过也是可以用css3的calc()计算的，例如上面的可以这样写：font-size: calc(var(--size) * 1px);
+         6.css变量可以相互传递，也就是说在定义变量的时候，可以使用其他变量 例如：
+            body{
+                --columns: 4;
+                --margins: calc(24px / var(--columns));
+            }
+     -->
+</body>
+</html>

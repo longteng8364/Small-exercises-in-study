@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,div,ul,li,span {
+				margin:0;
+				padding:0;
+			}
+			ul,li {
+				list-style:none;
+			}
+			#tab {
+				position:absolute;
+				left:50%;
+				top:50%;
+				margin-left:-460px;
+				margin-top:-145px;
+				padding:10px;
+				width:900px;
+				height:270px;
+				border:1px solid #228B22;
+				border-radius:10px;
+			}
+			#tab li {
+				height:30px;
+				line-height:30px;
+				font-size:16px;
+				
+				cursor:pointer;
+			}
+			#tab li span {
+				width:100px;
+				height:30px;
+				display:inline-block;
+				text-align:center;
+			}
+			.c1 {
+				background:red;
+			}
+			.c2 {
+				background:green;
+			}
+			.c3 {
+				background:blue;
+			}
+		</style>
+		<script>
+			window.onload=function ()
+			{
+				console.time('a');
+				var oTab=document.getElementById('tab');
+
+
+				//方法1:
+//				var str="";
+//				str+="<ul>";
+//					for(var i=1;i<=9;i++)
+//					{
+////						switch(i%3)
+////						{
+////							case 1:
+////							str+="<li class='c1'>";
+////							break;
+////							case 2:
+////							str+="<li class='c2'>";
+////							break;
+////							default:
+////							str+="<li class='c3'>"
+////						}
+////						str+="</li>";
+//						var val="c1";
+//						switch(i%3)
+//						{
+//							case 1:
+//								val="c1";
+//								break;
+//							case 2:
+//								val="c2";
+//								break;
+//							default:
+//								val="c3";
+//						}
+//						str+="<li class='"+val+"'>";
+//							for(var j=1;j<=i;j++)
+//							{
+//								str+="<span>";
+//									str+=""+j+"*"+i+"="+j*i+"";
+//								str+="</span>";
+//							}
+//						str+="</li>";
+//					}
+//				str+="</ul>";
+//				oTab.innerHTML=str;
+
+
+				//方法2:
+				var oUl=document.createElement('ul');
+				
+				for(var i=1;i<=9;i++)
+				{
+					var oLi=document.createElement('li');
+					switch(i%3)
+					{
+						case 1:
+							oLi.style.background="red";
+							break;
+						case 2:
+							oLi.style.background="green";
+							break;
+						default:
+							oLi.style.background="blue";
+					}
+					oUl.appendChild(oLi);
+					
+					for(var j=1;j<=i;j++)
+					{
+						var oSpan=document.createElement('span');
+						oSpan.innerHTML=j+'*'+i+'='+j*i;
+						oLi.appendChild(oSpan);
+					}
+				}
+				
+				oTab.appendChild(oUl);
+				
+			}
+			
+			console.timeEnd('a');
+		</script>
+	</head>
+	<body>
+		<div id="tab"></div>
+	</body>
+</html>

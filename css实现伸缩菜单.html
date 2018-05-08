@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul,li{
+				margin: 10px;
+				padding: 0;
+				list-style: none;
+				color:#111111;
+			}
+			.bd {
+				max-height: 0;
+				text-indent: 1em;
+				overflow: hidden;
+				transition: all 1s ease-out;
+			}
+			li:hover .bd {
+				max-height:600px;
+				transition-timing-function: ease-in;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<div class="hd">
+				1.什么是DOM?	
+				</div>
+			</li>
+			<li>
+				<div class="hd">
+				2.DOM的发展	
+				</div>
+				<div class="bd">
+					2.1 DOM0<br>
+					2.2 DOM1<br>
+					2.3 DOM2
+				</div>
+			</li>
+			<li>
+				<div class="hd">
+				3.DOM节点类型	
+				</div>
+				<div class="bd">
+					3.1 类型1<br>
+					3.2 类型2<br>
+					3.3 类型3<br>
+					3.4 类型4<br>
+					3.5类型5
+				</div>
+			</li>
+			<li>
+				<div class="hd">
+				4.元素节点的判断	
+				</div>
+			</li>
+		</ul>
+	</body>
+</html>

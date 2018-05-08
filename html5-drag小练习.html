@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+    .wrapper {
+        width: 50%;
+        height: 80%;
+        border: 1px solid #333;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .wrapper ul {
+        width: 100%;
+        height: 90%;
+    }
+    .wrapper ul li {
+        width: 90%;
+        height: 50px;
+        margin-bottom: 10px;
+        margin-left: 5%;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 50px;
+        font-size: 30px;
+        background: #ccc;
+    }
+    .wrapper .trash {
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        background: #ccc;
+    }
+    .wrapper .trash img {
+        height: 100%;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <ul>
+            <li draggable="true">1</li>
+            <li draggable="true">2</li>
+            <li draggable="true">3</li>
+            <li draggable="true">4</li>
+            <li draggable="true">5</li>
+        </ul>
+        <div class="trash">
+            <img src="./img/trash.jpg" alt="delete">
+        </div>
+    </div>
+
+    <script>
+        var li = document.getElementsByTagName('li'),
+            len = li.length,
+            ul = document.getElementsByTagName('ul')[0],
+            trash = document.getElementsByClassName('trash')[0];
+
+        function bindLiEvent(){
+            for(var i = 0; i < len; i++){
+                li[i].addEventListener('dragstart', function (e){
+                    e.dataTransfer.setData('data', getIndex(this));
+                })
+                li[i].addEventListener('dragover', function (e){
+                    e.preventDefault();
+                })
+                li[i].addEventListener('drop', function (e){
+                    var index = e.dataTransfer.getData('data');
+                    ul.insertBefore(li[index], this);
+                })
+            }
+        }
+        
+        bindLiEvent();
+
+        function bindTrashEvent(){
+            trash.addEventListener('dragover',function (e){
+                e.preventDefault();
+            })
+            trash.addEventListener('drop', function(e){
+                var index = e.dataTransfer.getData('data');
+                li[index].remove();
+            })
+        }
+
+        bindTrashEvent();
+        function getIndex(ele){
+            for(var i = 0; i < len; i++){
+                if(li[i] === ele){
+                    return i;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

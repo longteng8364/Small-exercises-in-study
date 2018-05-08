@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+		<form method="get" id="form">
+			<select id="year"></select>年
+			<select id="month"></select>月
+			<select id="day"></select>日
+		</form>
+	</body>
+</html>
+<script>
+	function createYear(startYear,endYear){
+		var year=document.getElementById('year');
+		for(var i=startYear; i<=endYear; i++)
+		{
+			var option=document.createElement('option');
+			option.innerHTML=i;
+			option.value=i;
+			year.appendChild(option);
+		}
+	}
+	
+	function createMonth(){
+		var month=document.getElementById('month');
+		for(var i=1; i<=12; i++)
+		{
+			var option=document.createElement('option');
+			option.innerHTML=i;
+			option.value=i;
+			month.appendChild(option);
+		}
+	}
+	function createDay(yy,mm)
+	{
+		var day=document.getElementById('day');
+		var days=[31,28,31,30,31,30,31,31,30,31,30,31];
+		if(((yy%4==0 && (yy%100)!=0))||(yy%400==0))
+		{
+			days[1]=29;
+		}
+		
+		for(var i=1; i<=days[mm-1]; i++)
+		{
+			var option=document.createElement('option');
+			option.innerHTML=i;
+			option.value=i;
+			day.appendChild(option);
+		}
+	}
+	
+	year.onchange=function(){
+			day.innerHTML='';
+			createDay(year.value,month.value);
+		}
+	month.onchange=function(){
+		day.innerHTML='';
+		createDay(year.value,month.value);
+	}
+	createYear(1970,2017);
+	createMonth();
+	createDay(1970,1);
+</script>

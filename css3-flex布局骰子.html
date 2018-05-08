@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.wrap{
+				width:500px;
+				height:300px;
+				margin:10px auto;
+				background:rgb(43,43,43);
+				border:3px solid #ccc;
+				border-radius:20px;
+			}
+			.mian{
+				margin:100px auto;
+				padding:10px;
+				width:100px;
+				height:100px;
+				border:5px solid #ccc;
+				background:rgb(231,231,231);
+				border-radius:20px;
+				display:flex;
+			}
+			.mian span{
+				width:30px;
+				height:30px;
+				background:#000;
+				border-radius:50%;
+			}
+			#mian6{
+				flex-wrap:wrap;
+				align-content:space-between;
+			}
+			#mian6 .col{
+				display:flex;
+				flex-basis:100%;
+				justify-content:space-between;
+			}
+			
+			
+			
+			#mian5{
+				flex-wrap:wrap;
+				align-content:space-between;
+			}
+			#mian5 .col{
+				display:flex;
+				flex-basis:100%;
+				justify-content:space-between;
+			}
+			#mian5 .col:nth-child(2){
+				justify-content:center;
+			}
+			
+			
+			#mian4{
+				flex-wrap:wrap;
+				align-content:space-between;
+			}
+			#mian4 .col{
+				display:flex;
+				flex-basis:100%;
+				justify-content:space-between;
+			}
+			
+			#mian3{
+				justify-content:space-between;
+			}
+			#mian3 span:nth-child(2){
+				align-self:center;
+			}
+			#mian3 span:nth-child(3){
+				align-self:flex-end;
+			}
+			
+			#mian2{
+				justify-content:space-between;
+			}
+			#mian2 span:nth-child(2){
+				align-self:flex-end;
+			}
+			
+			#mian1{
+				justify-content:center;
+				align-items:center;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div id="mian6" class="mian">
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+				
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="mian" id="mian5">
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+				<div class="col">
+					<span></span>
+				</div>
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="mian" id="mian4">
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+				<div class="col">
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="mian" id="mian3">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="mian" id="mian2">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="mian" id="mian1">
+				<span></span>
+			</div>
+		</div>
+	</body>
+</html>

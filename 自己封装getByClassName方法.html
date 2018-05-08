@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="demo   div  aa"></div>
+    <div class="  div    demo  aa"></div>
+    <div class=" div demo aa"></div>
+    <div></div>
+    <script>
+        //在IE9之前的浏览器中,getElementsByClassName()方法不兼容
+        
+        Document.prototype.getByClassName = function (className){
+            var allDomArr = Array.prototype.slice.call(document.getElementsByTagName('*'), 0);
+            var filterArr = [];
+
+            function dealClass(dom){
+                var reg = /\s+/g;
+                var arrClassName = dom.className.replace(reg, ' ').trim();
+                return arrClassName;
+            }
+
+            allDomArr.forEach(function (ele, index){
+                var itemClassArr = dealClass(ele).split(' ');
+                for(var i = 0; i < itemClassArr.length; i ++){
+                    if(itemClassArr[i] == className){
+                        filterArr.push(ele);
+                        break;
+                    }
+                }
+            });
+
+            return filterArr;
+        }
+
+        var oDemos = document.getByClassName('demo');
+        console.log(oDemos);
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgb(223,59,59);
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        border: none;
+        outline: none;
+        /* 去掉按钮点击之后外面的一个蓝色边框 */
+    }
+    button:active {
+        box-shadow: 0 0 3px #fff inset;
+    }
+    .wrap {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .table {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 50px solid #000;
+        background: url('./img/Folder.jpg') no-repeat;
+        background-size: contain;
+        animation: move 10s linear paused infinite;
+    }
+    .pin {
+        width: 10px;
+        height: 150px;
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        background: #ccc;
+        border-bottom-right-radius: 100%;
+        border-bottom-left-radius: 100%;
+        transform-origin: top;
+        transform: rotate(-60deg);
+        transition: all 0.5s;
+    }
+    .active {
+        transform: rotate(-40deg);
+    }
+    @keyframes move {
+        from{
+            transform: rotate(0);
+        }
+        to{
+            transform: rotate(360deg);
+        }
+    }
+    </style>
+</head>
+<body>
+    <button>&#9658</button>
+    <div class="wrap">
+        <div class="table"></div>
+        <div class="pin"></div>
+    </div>
+    <audio src="./media/周杰伦 - 回到过去 - 八度空间.mp3" ></audio>
+
+    <script>
+    var oBtn = document.getElementsByTagName('button')[0];
+    var oTable = document.getElementsByClassName('table')[0];
+    var oPin = document.getElementsByClassName('pin')[0];
+    var audio = document.getElementsByTagName('audio')[0];
+
+    var flag = true;
+    oBtn.onclick = function (){
+        if(flag){
+            flag = false;
+            oPin.className = 'active pin';
+            oTable.style.animationPlayState = 'running';
+            audio.play();
+        }else{
+            flag = true;
+            oPin.className = 'pin';
+            oTable.style.animationPlayState = 'paused';
+            audio.pause();
+        }
+    }
+    </script>
+</body>
+</html>

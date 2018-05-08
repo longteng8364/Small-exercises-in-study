@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #stage {
+            width: 1200px;
+            height: 600px;
+            /* border-radius: 50px; */
+            perspective: 800px;
+            margin: 200px auto;
+            background: #ddd;
+            overflow: hidden;
+        }
+        #wrapper {
+            width: 200px;
+            height: 125px;
+            position: relative;
+            margin: 175px auto;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg);
+            transition: 1s;
+            /* backface-visibility: hidden; */
+            
+        }
+        #wrapper img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /* transform: translateZ(200px); */
+            /* -webkit-box-reflect: below 10px; */
+        }
+        #wrapper img:nth-of-type(1){
+            transform: rotateY(0deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(2){
+            transform: rotateY(40deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(3){
+            transform: rotateY(80deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(4){
+            transform: rotateY(120deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(5){
+            transform: rotateY(160deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(6){
+            transform: rotateY(200deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(7){
+            transform: rotateY(240deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(8){
+            transform: rotateY(280deg) translateZ(320px);
+        }
+        #wrapper img:nth-of-type(9){
+            transform: rotateY(320deg) translateZ(320px);
+        }
+    </style>
+</head>
+<body>
+    <div id="stage">
+        <div id="wrapper">
+            <img src="./img/lj.jpg" alt="">
+            <img src="./img/ak.jpg" alt="">
+            <img src="./img/ex.jpg" alt="">
+            <img src="./img/exmf.jpg" alt="">
+            <img src="./img/csd.jpg" alt="">
+            <img src="./img/hs.jpg" alt="">
+            <img src="./img/hx.jpg" alt="">
+            <img src="./img/lw.jpg" alt="">
+            <img src="./img/px.jpg" alt="">
+        </div>
+    </div>
+
+    <script>
+        var wrap = document.getElementById('wrapper');
+        var stage = document.getElementById('stage');
+        var timer = null;
+        var degY = 0;
+        var degX = 20;
+        autoPlay();
+        function autoPlay(){
+            timer = setInterval(function (){
+                degY += 40;
+                // wrap.style.transform = "rotateY(-" + degY + "deg) rotateX(" + degX + " deg)";
+                wrap.style.transform = "rotateX(-20deg) rotateY(-" + degY + "deg)";
+                //要先rotateX 再rotateY
+        },1000);
+        }
+        
+        stage.onmouseover = function (){
+            clearInterval(timer);
+        }
+        stage.onmouseout = function (){
+            autoPlay();
+        }
+
+        // function getStyle(obj, attr){
+        //     if(window.getComputedStyle){
+        //         return window.getComputedStyle(obj, null)[attr];
+        //     }else{
+        //         return obj.currentStyle[attr];
+        //     }
+        // }
+
+        // console.log(getStyle(wrap, rotate));
+    </script>
+</body>
+</html>

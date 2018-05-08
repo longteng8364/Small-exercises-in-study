@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div {
+				margin:50px auto;
+				font-size:60px;
+				line-height:200px;
+				width:900px;
+				height:200px;
+			}
+			img {
+				width:100px;
+				height:150px;
+			}
+		</style>
+		<script>
+			window.onload=function ()
+			{
+				
+				
+				var aImg=document.getElementsByTagName('img');
+//				var year=myDate.getFullYear();
+//				var month=myDate.getMonth();
+//				var day=myDate.getDate();
+//				var week=myDate.getDay();
+
+				/*定时器在刷新之后要等1000ms之后才执行，所以每次刷新之后时间是00:00:00，所以可以在window.onload之后
+				先执行一下tick这个函数*/
+				var tick=function (){
+					function toString(x)
+					{
+//						if(x<10)
+//						{
+//							return '0'+x.toString();
+//						}
+//						else
+//						{
+//							return x.toString();
+//						}	
+						
+						if(x<10)
+						{
+							return '0'+x;
+						}
+						else
+						{
+							return ''+x;//直接在数字前面加个空字符串就可以变成字符串了；
+						}
+					}
+					
+					var myDate=new Date();
+					var hour=myDate.getHours();
+					var minute=myDate.getMinutes();
+					var second=myDate.getSeconds();
+					var str=toString(hour)+toString(minute)+toString(second);
+					
+					for(var i=0;i<aImg.length;i++)
+					{
+						//aImg[i].src='number/'+str[i]+'.png';
+						//str[i]在ie7下是undefined，为了兼容，要用charAt
+						aImg[i].src='number/'+str.charAt(i)+'.png';
+					}
+					
+					//alert(str[3]);
+				}
+				tick();
+				setInterval(tick,1000);
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id='clock'>
+			<img src="number/0.png" /> 
+			<img src="number/0.png" />
+			:
+			<img src="number/0.png" />
+			<img src="number/0.png" />
+			:
+			<img src="number/0.png" />
+			<img src="number/0.png" />
+		</div>
+	</body>
+</html>

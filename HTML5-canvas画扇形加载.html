@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #wrap {
+            width: 400px;
+            height: 450px;
+            margin: 0 auto;
+        }
+        /* #canvas {
+            border: 1px solid orange;
+        } */
+        #text {
+            width: 400px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+            color: orange;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <p id="text"></p>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        var con = canvas.getContext('2d');
+        var txt = document.getElementById('text');
+        
+        CanvasRenderingContext2D.prototype.loading = function (x,y,r,sDeg,eDeg){
+            this.save();
+            this.beginPath();
+            this.moveTo(x,y);
+            this.arc(x,y,r,sDeg*Math.PI/180,eDeg*Math.PI/180);
+            this.closePath();
+            this.restore();
+
+            return this;
+        }
+        con.fillStyle = 'orange';
+        //con.loading(200,200,100,0,90).fill();
+        var timer = null;
+        var persent = 0;
+        timer = setInterval(function (){
+            persent += 5;
+            con.loading(200,200,100,0,persent).fill();
+            txt.innerText = '加载中：' + Math.ceil(persent/360*100) + '%';
+            if(persent >= 360){
+                clearInterval(timer);
+                txt.innerText = '加载完成！';
+            }
+        },100);
+    </script>
+</body>
+</html>
